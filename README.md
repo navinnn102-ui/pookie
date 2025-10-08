@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pookie Love 💋</title>
+  <title>Pookie Love Everywhere 💋</title>
   <style>
     * {
       margin: 0;
@@ -32,7 +32,7 @@
       background: rgba(0, 0, 0, 0.5);
       padding: 10px 20px;
       border-radius: 25px;
-      z-index: 2;
+      z-index: 5;
     }
 
     button {
@@ -45,7 +45,7 @@
       border-radius: 30px;
       cursor: pointer;
       transition: 0.3s ease;
-      z-index: 2;
+      z-index: 5;
     }
 
     button:hover {
@@ -56,21 +56,32 @@
     .floating {
       position: absolute;
       font-size: 1.8em;
-      animation: float 8s linear infinite;
-      opacity: 0.8;
+      animation: floatAround 10s ease-in-out infinite;
+      opacity: 0.9;
+      z-index: 2;
+      user-select: none;
+      pointer-events: none;
     }
 
-    @keyframes float {
+    @keyframes floatAround {
       0% {
-        transform: translateY(100vh) scale(0.8);
-        opacity: 0;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 0.8;
       }
-      50% {
+      25% {
+        transform: translate(30px, -40px) rotate(30deg) scale(1.2);
         opacity: 1;
       }
+      50% {
+        transform: translate(-20px, 50px) rotate(-40deg) scale(1);
+        opacity: 0.8;
+      }
+      75% {
+        transform: translate(40px, 20px) rotate(60deg) scale(1.1);
+      }
       100% {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
+        transform: translate(0, 0) rotate(360deg) scale(1);
+        opacity: 0.9;
       }
     }
 
@@ -80,7 +91,7 @@
       right: 15px;
       font-size: 3em;
       animation: pawMove 3s ease-in-out infinite alternate;
-      z-index: 2;
+      z-index: 3;
     }
 
     @keyframes pawMove {
@@ -96,35 +107,39 @@
 <body>
   <h1>Happy Bday to my Supidee Pookie 💖</h1>
   <button onclick="nextPage()">Next Baby ➜</button>
-
   <div class="cat-paw">🐾</div>
 
   <script>
     function createFloating() {
       const el = document.createElement('div');
       el.classList.add('floating');
-      const types = ['💋', 'To my Pookiee 💖', '💋', '💖 Pookie 💋'];
-      el.textContent = types[Math.floor(Math.random() * types.length)];
+      const texts = ['💋', '💖 To my Pookiee 💖', '💋', '💋 Pookie 💋', '💋💋'];
+      el.textContent = texts[Math.floor(Math.random() * texts.length)];
+      
+      // random positions all over the screen
       el.style.left = Math.random() * 100 + 'vw';
-      el.style.animationDuration = 6 + Math.random() * 4 + 's';
-      document.body.appendChild(el);
+      el.style.top = Math.random() * 100 + 'vh';
+      // random rotation angle
+      el.style.transform = `rotate(${Math.random() * 360}deg)`;
+      // random animation duration for variety
+      el.style.animationDuration = 5 + Math.random() * 10 + 's';
 
-      setTimeout(() => el.remove(), 10000);
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 15000);
     }
 
-    setInterval(createFloating, 700);
+    setInterval(createFloating, 400);
 
     function nextPage() {
       document.body.innerHTML = `
-        <div style="text-align:center; color:white;">
-          <h2>Love you sooo much my dear Supidee 💞</h2>
-          <p>Stay safe, Chinnu 🐾</p>
+        <div style="text-align:center; color:white; position:relative;">
+          <h2 style="font-size:2em;">Love you sooo much my dear Supidee 💞</h2>
+          <p style="font-size:1.3em;">Stay safe, Chinnu 🐾</p>
           <div class="cat-paw">🐾</div>
         </div>
       `;
-      setInterval(createFloating, 700);
+      setInterval(createFloating, 400);
     }
   </script>
 </body>
 </html>
-
